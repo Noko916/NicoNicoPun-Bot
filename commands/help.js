@@ -6,7 +6,7 @@ const EmbedHelp = new Discord.MessageEmbed()
   .addField(".comyu", "各コミュリンク")
   .addField(
     ".dice [?]d[??]",
-    "[?]d[??] のダイスを振るよ\n個数: 20個まで　ダイス: 1000まで"
+    "[?]d[??] のダイスを振ります\n個数: 20個まで　ダイス: 1000まで"
   )
   .addField(".help", "これを表示するコマンド")
   .addField(".pick [?? ?? ??]", "どれか１つを抽出します")
