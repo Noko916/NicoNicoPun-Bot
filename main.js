@@ -118,7 +118,7 @@ client.on("message", message => {
 });
 
 client.on("ready", () => {
-  client.user.setActivity(`Civ ${version}`, { type: "PLAYING" });
+  client.user.setActivity(`Version: ${version}`, { type: "PLAYING" });
   console.log("入っているサーバー:");
   var ServerList = client.guilds.cache.map(a => a.name).join(" / ");
   console.log("[ " + ServerList + " ]");
