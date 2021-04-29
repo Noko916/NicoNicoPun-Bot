@@ -10,9 +10,15 @@ const Discord = require("discord.js");
     //.addField("ニコ生カジノトーナメント","[総合運営本部](https://com.nicovideo.jp/community/co4145215)")
     //.setColor(1752220);
   
-exports.run = (client, message, args) => {
-  
-    message.channel.send(EmbedCommunity);
-    return;
-  
-};
+    module.exports = {
+      name: "comyu",
+      description: "コミュ一覧を表示します",
+      aliases: ["com", "commu", "komyu"],
+    
+      async execute(client, message, args) {
+    
+        message.channel.send(EmbedCommunity);
+        return;
+      },
+    };
+    

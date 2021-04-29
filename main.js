@@ -1,30 +1,18 @@
-// Response for Uptime Robot
-const http = require("http");
-http
-  .createServer(function(request, response) {
-    response.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
-    response.end("Discord bot は 動いています\n");
-  })
-  .listen(3000);
-
 // Discord bot implements
-const Discord = require("discord.js");
+const Discord     = require("discord.js");
+const fs          = require('fs');
+const { prefix, version }  = require('./config.json');
+
 const client = new Discord.Client();
-const Eris = require("eris");
-const bot = new Eris(process.env.DISCORD_BOT_TOKEN);
+client.commands = new Discord.Collection();
 
-var args = 0;
-var command = 0;
+const cmds = fs.readdirSync(`./commands`).filter(file => file.endsWith('.js'));
 
-const prefix = ".";
+for (const file of cmds) {
+  const cmd = require(`./commands/${file}`);
 
-client.on("ready", message => {
-  client.user.setActivity("監視", { type: "PLAYING" });
-  console.log("入っているサーバー:");
-  var ServerList = client.guilds.cache.map(a => a.name).join(" / ");
-  console.log("[ " + ServerList + " ]");
-  console.log("Ready!");
-});
+  client.commands.set(cmd.name, cmd);
+}
 
 client.on("message", async message => {
   const re = new RegExp(
@@ -35,7 +23,6 @@ client.on("message", async message => {
     return;
   }
   console.log(`${message.author.tag} to cite [${message.content}]`);
-  const guild_id = results[1];
   const channel_id = results[2];
   const message_id = results[3];
 
@@ -84,6 +71,14 @@ client.on("message", message => {
 
   if (!message.content.startsWith(prefix)) return; //prefixがついてないコマンドを無視
 
+
+  /*
+  if (!message.author.id === "221360357191581697") {
+    message.channel.send("メンテ中です");
+    return;
+  }
+  */
+
   let msg = message.content.toUpperCase();
   let sender = message.author;
 
@@ -91,42 +86,43 @@ client.on("message", message => {
     .slice(prefix.length)
     .trim()
     .split(` `);
-  let cmd = args.shift().toLowerCase();
+
+  const cmdName = args.shift().toLowerCase();
+
+  //const cmd = args.shift().toLowerCase();
+  const cmd = client.commands.get(cmdName)
+    || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
+
+  if (!cmd) {
+    console.log(`${message.author.tag} ran the command ${prefix}${cmdName}`);
+  }
 
     // commands/xxx.js の読み込み
     try {
-      delete require.cache[require.resolve(`./commands/${cmd}.js`)]; //キャッシュ消去
-      let commandFile = require(`./commands/${cmd}.js`);
-      commandFile.run(client, message, args); // xxx.jsに client, message, argsの設定を引き継いで実行
+      //delete require.cache[require.resolve(`./commands/${cmd}.js`)]; //キャッシュ消去
+      console.log(`${message.author.tag} ran the command ${prefix}${cmdName}`);
+      cmd.execute(client, message, args);
 
       //エラー処理
     } catch (e) {
-      console.log(e.stack);
-      message.channel.send("そんなコマンドはないよ！");
+      message.channel.send("そのコマンドはありません")
+      console.log(e);
 
       //確認処理 (console.log で書き出し)
     } finally {
-      console.log(`${message.author.tag} ran the command ${cmd}`);
-      return;
+      //console.log(`${message.author.tag} ran the command ${cmd}`);
     }
 
-  if (message.content.startsWith(".")) {
-    args = message.content
-      .slice(prefix.length)
-      .trim()
-      .split(/ +/g);
-    command = args.shift().toLowerCase();
-  } else {
-    args = 0;
-    command = 0;
-  }
-
+  return;
   //ここまで
 });
 
-if (process.env.DISCORD_BOT_TOKEN == undefined) {
-  console.log("please set ENV: DISCORD_BOT_TOKEN");
-  process.exit(0);
-}
+client.on("ready", () => {
+  client.user.setActivity(`Civ ${version}`, { type: "PLAYING" });
+  console.log("入っているサーバー:");
+  var ServerList = client.guilds.cache.map(a => a.name).join(" / ");
+  console.log("[ " + ServerList + " ]");
+  console.log("Ready!");
+});
 
 client.login(process.env.DISCORD_BOT_TOKEN);

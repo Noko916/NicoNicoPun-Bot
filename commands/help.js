@@ -1,21 +1,41 @@
+const { prefix } = require('../config.json');
 const Discord = require("discord.js");
 
-const EmbedHelp = new Discord.MessageEmbed()
-  .setTitle("コマンド一覧")
-  .addField(".bank", "バンクへのリンク")
-  .addField(".comyu", "各コミュリンク")
-  .addField(
-    ".dice [?]d[??]",
-    "[?]d[??] のダイスを振ります\n個数: 20個まで　ダイス: 1000まで"
-  )
-  .addField(".help", "これを表示するコマンド")
-  .addField(".pick [?? ?? ??]", "どれか１つを抽出します")
-  .addField(".repeat [?????]", "[?????]と同じ発言をします")
-  .addField(".sugoroku", "すごろくツアーズへのリンク")
+module.exports = {
+  name: "help",
+  description: "コマンドの使い方を表示します",
+  aliases: ["halp", "welp", "walp", "command", "commands", "cmd", "herupu"],
 
-  .setColor(1752220)
+  async execute(client, message, args) {
+    const EmbedHelp = new Discord.MessageEmbed().setColor(1752220);
+    const { commands } = message.client;
 
-exports.run = (client, message, args) => {
-  message.channel.send(EmbedHelp);
-  return;
-};
+    if (!args.length) {
+
+      EmbedHelp
+        .setTitle("使えるコマンドはこちら")
+
+        .setDescription(`${prefix}` + commands.map(c => c.name).join(`\n${prefix}`))
+        .setFooter(`${prefix}help [command name]   で詳細を表示します`);
+      message.channel.send(EmbedHelp);
+
+      return;
+    }
+
+    const name = args[0];
+    const cmd = commands.get(name)
+      || commands.find(c => c.aliases && c.aliases.includes(name));
+
+    if (!cmd) {
+      message.reply(`\`${prefix}${name}}\` なんてコマンドないよ！！`)
+
+      return;
+    }
+
+    EmbedHelp.setTitle(`${prefix}${cmd.name}`);
+    if (cmd.description) EmbedHelp.addField(`Description`, cmd.description);
+    if (cmd.aliases)     EmbedHelp.addField(`Aliases`,     cmd.aliases.join(', '));
+
+    message.channel.send(EmbedHelp);
+  }
+}

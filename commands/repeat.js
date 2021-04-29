@@ -1,9 +1,15 @@
 const Discord = require("discord.js");
 
-exports.run = (client, message, args) => {
-  var cont = message.content;
-  var rep = cont.replace(".repeat ", "");
+module.exports = {
+  name: "repeat",
+  description: "同じ言葉を繰り返します\n\`.repeat <***>\`",
+  aliases: ["rep"],
 
-  message.channel.send(rep);
-  return;
+  async execute(client, message, args) {
+    var cont = message.content;
+    var rep = cont.replace(".repeat ", "");
+
+    message.channel.send(rep);
+    return;
+  },
 };
