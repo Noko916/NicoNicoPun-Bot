@@ -68,7 +68,7 @@ client.on("message", async message => {
 
   const MessageChID = message.channel.id;
   
-  if (!PlayerChID.includes(MessageChID) || MessageChID != AnnounceChID) {debug.log("return0"); return;}  // 指定外のチャンネルの発言の場合はreturn;
+  if (!PlayerChID.includes(MessageChID) || MessageChID != AnnounceChID) {console.log("return0"); return;}  // 指定外のチャンネルの発言の場合はreturn;
 
   if (message.author.bot) return;   // botの場合return
 
@@ -196,7 +196,7 @@ client.on("ready", () => {
   console.log("入っているサーバー:");
   var ServerList = client.guilds.cache.map(a => a.name).join(" / ");
   console.log("[ " + ServerList + " ]");
-  console.log("Ready!");
+  console.log("Ready! (ver." + version + ")");
 });
 
 client.login(process.env.DISCORD_BOT_TOKEN);
