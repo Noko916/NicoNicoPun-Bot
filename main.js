@@ -80,12 +80,13 @@ client.on("message", async message => {
   const channel_id = results[2];
   const message_id = results[3];
 
-  const channel = client.channels.cache.get(LOGchannel);
+const PLchannel = client.channels.cache.get(message.channel.id)
+const channel = client.channels.cache.get(LOGchannel);
   if (!channel) {
     return;
   }
 
-  channel.messages
+  PLchannel.messages
     .fetch(message_id)
     .then(message =>
       message.channel.send({
