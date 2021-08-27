@@ -80,12 +80,16 @@ client.on("message", async message => {
   const channel_id = results[2];
   const message_id = results[3];
 
-const PLchannel = client.channels.cache.get(message.channel.id)
-const channel = client.channels.cache.get(channel_id);
+  const PLchannel = client.channels.cache.get(message.channel.id)
+  const channel = client.channels.cache.get(channel_id);
   if (!channel) {
     return;
   }
 
+  channel.send(message.content);  
+
+
+  /*
   channel.messages
     .fetch(message_id)
     .then(message =>
@@ -108,7 +112,9 @@ const channel = client.channels.cache.get(channel_id);
       })
     )
     .catch(console.error);
+    */
 });
+
 
 // Main
 client.on("message", message => {
