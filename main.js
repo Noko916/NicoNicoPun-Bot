@@ -1,7 +1,7 @@
 // Discord bot implements
-const Discord     = require("discord.js");
-const fs          = require('fs');
-const { prefix, version }  = require('./config.json');
+const Discord = require("discord.js");
+const fs = require('fs');
+const { prefix, version } = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -60,65 +60,71 @@ client.on("message", async message => {
 
 // 大会用
 
-const PLchannels = ["880762821070172161", "880762887587655732", "880762936065417286", "880762969137512508", "880763070979391498", "880763122963583008", "880763163648335892"]
-const LOGchannel = "880764948584726588";
+const PlayerChID = ["880762821070172161", "880762887587655732", "880762936065417286", "880762969137512508", "880763070979391498", "880763122963583008", "880763163648335892"]
+const LogChID = "880764948584726588";
+const AnnounceChID = "880875110322565150";
 
 client.on("message", async message => {
 
-  if(!PLchannels.includes(message.channel.id)) return;  // Player-n のチャンネル以外の発言の場合はreturn
+  const MessageChID = message.channel.id;
+  
+  if (!PlayerChID.includes(MessageChID) || MessageChID != AnnounceChID) {debug.log("return0"); return;}  // 指定外のチャンネルの発言の場合はreturn;
 
   if (message.author.bot) return;   // botの場合return
 
-  console.log(PLchannels.includes(message.channel.id))
-  console.log(message.channel.id);
+  console.log(PlayerChID.includes(MessageChID))
+  console.log(MessageChID);
 
-  const ALchannel = client.channels.cache.get(LOGchannel); 
-  const results = message.content;  // メッセージの内容(本文)
 
-  ALchannel.send(results);  // 送信
+  // プレイヤーのメッセージをログに収集
+  if (PlayerChID.includes(MessageChID)) {
 
-  ALchannel.send({
-    embed: {
-      author: {
-        name: message.member.displayName,
-        icon_url: message.member.user.displayAvatarURL()
-      },
-      image: {
-        url: message.attachments.map(attachment => attachment.url)[0]
-      },
-      description: message.content,
-      footer: {
-        text: `#${message.channel.name}`
-      },
-      timestamp: message.createdTimestamp
+    const sendEmbed = {
+      embed: {
+        author: {
+          name: message.member.displayName,
+          icon_url: message.member.user.displayAvatarURL()
+        },
+        image: {
+          url: message.attachments.map(attachment => attachment.url)[0]
+        },
+        description: message.content,
+        footer: {
+          text: `#${message.channel.name}`
+        },
+        timestamp: message.createdTimestamp
+      }
     }
-  })
+
+    // 送信
+    client.channels.cache.get(LogChID).send(sendEmbed);
+  }
 
 
-  /*
-  channel.messages
-    .fetch(message_id)
-    .then(message =>
-      message.channel.send({
-        embed: {
-          author: {
-            name: message.member.displayName,
-            icon_url: message.member.user.displayAvatarURL()
-          },
-          image: {
-            url: message.attachments.map(attachment => attachment.url)[0]
-          },
-          description: message.content,
-          footer: {
-            text: `${message.guild.name} #${message.channel.name}`,
-            icon_url: message.guild.iconURL()
-          },
-          timestamp: message.createdTimestamp
-        }
-      })
-    )
-    .catch(console.error);
-    */
+  // アナウンスチャンネルから各プレイヤーチャンネルに一斉にメッセージを送信
+  if(MessageChID == AnnounceChID){
+
+    const sendEmbed = {        
+      embed: {
+        author: {
+          name: message.member.displayName,
+          icon_url: message.member.user.displayAvatarURL()
+        },
+        description: message.content,
+        footer: {
+          text: `#${message.channel.name}`
+        },
+        timestamp: message.createdTimestamp
+      }
+    }
+
+    PlayerChID.forEach(element => {
+      client.channels.cache.get(element).send(sendEmbed)
+    });
+
+    client.channels.cache.get(LogChID).send(sendEmbed)
+
+  }
 });
 
 
@@ -127,7 +133,7 @@ client.on("message", message => {
   if (message.author.bot) return;
 
   if (message.content.includes("everyone")) return;
-  
+
   if (message.mentions.has(client.user)) {
     message.reply(
       "呼びましたか？\n問題が発生した時は、<@221360357191581697> に連絡してください。"
@@ -165,21 +171,21 @@ client.on("message", message => {
     console.log(`${message.author.tag} ran the command ${prefix}${cmdName}`);
   }
 
-    // commands/xxx.js の読み込み
-    try {
-      //delete require.cache[require.resolve(`./commands/${cmd}.js`)]; //キャッシュ消去
-      console.log(`${message.author.tag} ran the command ${prefix}${cmdName}`);
-      cmd.execute(client, message, args);
+  // commands/xxx.js の読み込み
+  try {
+    //delete require.cache[require.resolve(`./commands/${cmd}.js`)]; //キャッシュ消去
+    console.log(`${message.author.tag} ran the command ${prefix}${cmdName}`);
+    cmd.execute(client, message, args);
 
-      //エラー処理
-    } catch (e) {
-      message.channel.send("そのコマンドはありません")
-      console.log(e);
+    //エラー処理
+  } catch (e) {
+    message.channel.send("そのコマンドはありません")
+    console.log(e);
 
-      //確認処理 (console.log で書き出し)
-    } finally {
-      //console.log(`${message.author.tag} ran the command ${cmd}`);
-    }
+    //確認処理 (console.log で書き出し)
+  } finally {
+    //console.log(`${message.author.tag} ran the command ${cmd}`);
+  }
 
   return;
   //ここまで
