@@ -65,6 +65,9 @@ const LOGchannel = 880764948584726588
 
 client.on("message", async message => {
 
+  console.log(PLchannels.includes(message.channel.id))
+  console.log(message.channel.id);
+
   if(!PLchannels.includes(message.channel.id)){
     return;
   }
