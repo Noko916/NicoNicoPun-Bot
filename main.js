@@ -65,29 +65,34 @@ const LOGchannel = "880764948584726588";
 
 client.on("message", async message => {
 
+  if(!PLchannels.includes(message.channel.id)) return;  // Player-n のチャンネル以外の発言の場合はreturn
+
+  if (message.author.bot) return;   // botの場合return
+
   console.log(PLchannels.includes(message.channel.id))
   console.log(message.channel.id);
 
-  if(!PLchannels.includes(message.channel.id)){
-    console.log("check1");
-    return;
-  }
+  const ALchannel = client.channels.cache.get(LOGchannel); 
+  const results = message.content;  // メッセージの内容(本文)
 
-  const results = message.content;
-  //if (!results) {
-  //  return;
-  //}
-  
-  const channel_id = results[2];
-  const message_id = results[3];
+  ALchannel.send(results);  // 送信
 
-  const PLchannel = client.channels.cache.get(message.channel.id)
-  const ALchannel = client.channels.cache.get(LOGchannel);
-  //if (!channel) {
-  //  return;
-  //}
-
-  ALchannel.send(results);
+  ALchannel.send({
+    embed: {
+      author: {
+        name: message.member.displayName,
+        icon_url: message.member.user.displayAvatarURL()
+      },
+      image: {
+        url: message.attachments.map(attachment => attachment.url)[0]
+      },
+      description: message.content,
+      footer: {
+        text: `#${message.channel.name}`
+      },
+      timestamp: message.createdTimestamp
+    }
+  })
 
 
   /*
