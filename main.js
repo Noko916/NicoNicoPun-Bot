@@ -14,6 +14,8 @@ for (const file of cmds) {
   client.commands.set(cmd.name, cmd);
 }
 
+// URL抽出
+/*
 client.on("message", async message => {
   const re = new RegExp(
     "https://discordapp.com/channels/([0-9]{18})/([0-9]{18})/([0-9]{18})"
@@ -54,7 +56,57 @@ client.on("message", async message => {
     )
     .catch(console.error);
 });
+*/
 
+// 大会用
+
+const PLchannels = [880762821070172161, 880762887587655732, 880762936065417286, 880762969137512508, 880763070979391498, 880763122963583008, 880763163648335892]
+const LOGchannel = 880764948584726588
+
+client.on("message", async message => {
+
+  if(!PLchannels.includes(message.channel.id)){
+    return;
+  }
+
+  const results = message.content;
+  if (!results) {
+    return;
+  }
+  
+  const channel_id = results[2];
+  const message_id = results[3];
+
+  const channel = client.channels.cache.get(LOGchannel);
+  if (!channel) {
+    return;
+  }
+
+  channel.messages
+    .fetch(message_id)
+    .then(message =>
+      message.channel.send({
+        embed: {
+          author: {
+            name: message.member.displayName,
+            icon_url: message.member.user.displayAvatarURL()
+          },
+          image: {
+            url: message.attachments.map(attachment => attachment.url)[0]
+          },
+          description: message.content,
+          footer: {
+            text: `${message.guild.name} #${message.channel.name}`,
+            icon_url: message.guild.iconURL()
+          },
+          timestamp: message.createdTimestamp
+        }
+      })
+    )
+    .catch(console.error);
+});
+
+// Main
 client.on("message", message => {
   if (message.author.bot) return;
 
