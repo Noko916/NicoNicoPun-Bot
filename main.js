@@ -69,24 +69,25 @@ client.on("message", async message => {
   console.log(message.channel.id);
 
   if(!PLchannels.includes(message.channel.id)){
+    console.log("check1");
     return;
   }
 
   const results = message.content;
-  if (!results) {
-    return;
-  }
+  //if (!results) {
+  //  return;
+  //}
   
   const channel_id = results[2];
   const message_id = results[3];
 
   const PLchannel = client.channels.cache.get(message.channel.id)
-  const channel = client.channels.cache.get(channel_id);
-  if (!channel) {
-    return;
-  }
+  const ALchannel = client.channels.cache.get(channel_id);
+  //if (!channel) {
+  //  return;
+  //}
 
-  channel.send(message.content);  
+  ALchannel.send(results);  
 
 
   /*
