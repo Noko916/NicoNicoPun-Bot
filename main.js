@@ -82,12 +82,12 @@ client.on("message", async message => {
   const message_id = results[3];
 
   const PLchannel = client.channels.cache.get(message.channel.id)
-  const ALchannel = client.channels.cache.get(channel_id);
+  const ALchannel = client.channels.cache.get(LOGchannel);
   //if (!channel) {
   //  return;
   //}
 
-  ALchannel.send(results);  
+  ALchannel.send(results);
 
 
   /*
