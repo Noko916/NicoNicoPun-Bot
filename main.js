@@ -102,7 +102,10 @@ client.on("message", async message => {
 
 
   // アナウンスチャンネルから各プレイヤーチャンネルに一斉にメッセージを送信
-  if(MessageChID == AnnounceChID){
+  if(MessageChID == AnnounceChID && message.content.startsWith("+")){
+
+    const cont = message.content;
+    const rep = cont.slice(1);
 
     const sendEmbed = {        
       embed: {
@@ -110,7 +113,7 @@ client.on("message", async message => {
           name: message.member.displayName,
           icon_url: message.member.user.displayAvatarURL()
         },
-        description: message.content,
+        description: rep,
         footer: {
           text: `#${message.channel.name}`
         },
