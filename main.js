@@ -92,7 +92,6 @@ client.on("message", async message => {
         footer: {
           text: `#${message.channel.name}`
         },
-        color: 15844367,
         timestamp: message.createdTimestamp
       }
     }
