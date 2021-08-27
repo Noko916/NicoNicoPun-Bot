@@ -68,13 +68,9 @@ client.on("message", async message => {
 
   const MessageChID = message.channel.id;
   
-  if (!PlayerChID.includes(MessageChID) && MessageChID != AnnounceChID) {console.log("return0"); return;}  // 指定外のチャンネルの発言の場合はreturn;
+  if (!PlayerChID.includes(MessageChID) && MessageChID != AnnounceChID) return; // 指定外のチャンネルの発言の場合はreturn;
 
   if (message.author.bot) return;   // botの場合return
-
-  console.log(PlayerChID.includes(MessageChID))
-  console.log(MessageChID);
-
 
   // プレイヤーのメッセージをログに収集
   if (PlayerChID.includes(MessageChID)) {
