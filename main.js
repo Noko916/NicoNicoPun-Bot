@@ -141,13 +141,14 @@ client.on("message", async message => {
 
   if(message.content == "~upd"){
     //console.log("Update")
-    for(var i = 0; i < PlayerChID.length; i++){
+    //for(var i = 0; i < PlayerChID.length; i++){
+    for(var i = 0; i < 2; i++){
 
       //console.log("Updat2e")
       const RC = message.guild.roles.cache.get(PlayerRole[i]);
       //console.log(RC)
       console.log("------------------------------")
-      console.log(RC.members)
+      console.log(RC.members.user.username)
       console.log(RC.members.size)
       console.log(RC.members.name)
       console.log("------------------------------")
