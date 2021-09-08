@@ -70,8 +70,9 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
   console.log("guildMemberUpdate");
   console.log(newMember.user.username);
   console.log("--1--")
-  console.log(newMember);
+  console.log(newMember.roles);
   console.log("--2--")
+  console.log(newMember.roles.name);
 
 })
 
