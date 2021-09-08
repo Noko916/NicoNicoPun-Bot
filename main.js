@@ -148,10 +148,19 @@ client.on("message", async message => {
       const RC = message.guild.roles.cache.get(PlayerRole[i]);
       //console.log(RC)
       console.log("------------------------------")
-      console.log(RC.members.user)
+      console.log(RC.members)
       console.log("------------------------------")
 
     }
+  }
+
+  if(message.content == "~chk"){
+
+      const RC = message.guild.roles.cache.get(PlayerRole[0]);
+
+      console.log("------------------------------")
+      console.log(RC.members)
+      console.log("------------------------------")
   }
 
 });
