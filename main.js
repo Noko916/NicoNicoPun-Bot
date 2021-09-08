@@ -137,10 +137,11 @@ client.on("message", async message => {
 
   }
 
-  if(message.content.startsWith == "~Update"){
-
+  if(message.content == "~Update"){
+    console.log("Update")
     for(var i = 0; i < PlayerChID.length; i++){
 
+      console.log("Updat2e")
       const RC = message.guild.roless.cache.get(PlayerRole[i]);
       message.channel.send(`${RC.name}`)
 
