@@ -67,8 +67,8 @@ const AnnounceChID = "880875110322565150";
 client.on("guildMemberUpdate", (oldMember, newMember) => {
 
   console.log("guildMemberUpdate");
-  console.log(oldMember.user.name);
-  console.log(newMember.user.name);
+  console.log(oldMember.user.username);
+  console.log(newMember.user.username);
 
 })
 
