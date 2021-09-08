@@ -145,7 +145,11 @@ client.on("message", async message => {
 
       console.log("Updat2e")
       const RC = message.guild.roles.cache.get(PlayerRole[i]);
-      message.channel.send(`${RC.members.name}`)
+      console.log(RC)
+      console.log("------------------------------")
+      console.log(RC.member)
+      console.log("------------------------------")
+      console.log(RC.member.name)
 
     }
   }
