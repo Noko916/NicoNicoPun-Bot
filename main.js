@@ -64,6 +64,13 @@ const PlayerChID = ["880762821070172161", "880762887587655732", "880762936065417
 const LogChID = "880764948584726588";
 const AnnounceChID = "880875110322565150";
 
+client.on("guildMemberUpdate", (oldMember, newMember) => {
+
+  console.log("guildMemberUpdate");
+  console.log(oldMember.user.name);
+
+})
+
 client.on("message", async message => {
 
   const MessageChID = message.channel.id;
