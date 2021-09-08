@@ -137,6 +137,8 @@ client.on("message", async message => {
 
   }
 
+  console.log(message.content);
+
   if(message.content == "..Update"){
     console.log("Update")
     for(var i = 0; i < PlayerChID.length; i++){
