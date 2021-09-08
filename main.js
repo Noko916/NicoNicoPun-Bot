@@ -148,7 +148,7 @@ client.on("message", async message => {
       const RC = message.guild.roles.cache.get(PlayerRole[i]);
       //console.log(RC)
       console.log("------------------------------")
-      console.log(RC.members[0].user);
+      console.log(RC.members.cache.get("username"));
       console.log("------------------------------")
 
     }
