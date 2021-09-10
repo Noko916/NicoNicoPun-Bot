@@ -59,25 +59,11 @@ client.on("message", async message => {
 */
 
 // 大会用
-
+/*
 const PlayerRole = ["880761554633641994", "880761972549890088", "880762186606198824", "880762263311626251", "880762336422551622", "880762421751476226", "880762536285315093"]
 const PlayerChID = ["880762821070172161", "880762887587655732", "880762936065417286", "880762969137512508", "880763070979391498", "880763122963583008", "880763163648335892"]
 const LogChID = "880764948584726588";
 const AnnounceChID = "880875110322565150";
-
-/*
-client.on("guildMemberUpdate", (oldMember, newMember) => {
-
-  console.log("guildMemberUpdate");
-  console.log("--username--")
-  console.log(newMember.user.username);
-  console.log("--1--")
-  console.log(newMember.roles._roles.id);
-  console.log("--2--")
-  console.log(newMember.roles._roles.name);
-
-})
-*/
 
 client.on("message", async message => {
 
@@ -166,7 +152,7 @@ client.on("message", async message => {
   }
 
 });
-
+*/
 
 // Main
 client.on("message", message => {
