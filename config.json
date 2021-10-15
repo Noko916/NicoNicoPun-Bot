@@ -1,5 +1,9 @@
 {
     "prefix": ".",
 
-    "version": 67
+    "version": 68,
+
+    "Mode": "Normal",
+
+    "isTourney": false
 }
