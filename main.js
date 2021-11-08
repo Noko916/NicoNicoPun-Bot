@@ -130,7 +130,7 @@ client.on("message", message => {
 
     var TransfarEmbed = new Discord.MessageEmbed()
       .setAuthor(message.member.displayName, message.member.displayAvatarURL)
-      .description(message.content)
+      .setDescription(message.content)
       .setImage(message.attachments.map(attachment => attachment.url)[0])
       .setFooter(`${message.guild.name} #${message.channel.name}`)
       .setTimestamp()
