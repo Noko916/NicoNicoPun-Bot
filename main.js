@@ -126,7 +126,7 @@ client.on("message", message => {
   /* ----------------------------------------------------------------------------------------------- */
 
   // お客様サポートの転送
-  if (message.channel.id == '668726812276293632') {
+  if (message.channel.id == '777080266824482817') { // 隠れ家Hold'Em #ニコプンお客様サポートセンター
 
     var TransfarEmbed = new Discord.MessageEmbed()
       .setAuthor(message.member.displayName, message.author.displayAvatarURL())
@@ -136,7 +136,7 @@ client.on("message", message => {
       .setTimestamp()
       .setColor(1752220);
 
-    client.channels.cache.get('664211602698141696').send(TransfarEmbed)
+    client.channels.cache.get('738003249575100447').send(TransfarEmbed);  // にこにこぷん 運営チーム #ボックス報告
   }
 
   /* ----------------------------------------------------------------------------------------------- */
