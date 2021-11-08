@@ -14,50 +14,6 @@ for (const file of cmds) {
   client.commands.set(cmd.name, cmd);
 }
 
-// URL抽出
-/*
-client.on("message", async message => {
-  const re = new RegExp(
-    "https://discordapp.com/channels/([0-9]{18})/([0-9]{18})/([0-9]{18})"
-  );
-  const results = message.content.match(re);
-  if (!results) {
-    return;
-  }
-  console.log(`${message.author.tag} to cite [${message.content}]`);
-  const channel_id = results[2];
-  const message_id = results[3];
-
-  const channel = client.channels.cache.get(channel_id);
-  if (!channel) {
-    return;
-  }
-
-  channel.messages
-    .fetch(message_id)
-    .then(message =>
-      message.channel.send({
-        embed: {
-          author: {
-            name: message.member.displayName,
-            icon_url: message.member.user.displayAvatarURL()
-          },
-          image: {
-            url: message.attachments.map(attachment => attachment.url)[0]
-          },
-          description: message.content,
-          footer: {
-            text: `${message.guild.name} #${message.channel.name}`,
-            icon_url: message.guild.iconURL()
-          },
-          timestamp: message.createdTimestamp
-        }
-      })
-    )
-    .catch(console.error);
-});
-*/
-
 // 大会用
 if (isTournament) {
   const PlayerRole = ["880761554633641994", "880761972549890088", "880762186606198824", "880762263311626251", "880762336422551622", "880762421751476226", "880762536285315093"]
@@ -148,15 +104,11 @@ if (isTournament) {
       });
 
       client.channels.cache.get(LogChID).send(sendEmbed)
-
     }
-
   });
 }
 
-
 /* ----------------------------------------------------------------------------------------------- */
-
 
 // Main
 client.on("message", message => {
@@ -171,17 +123,28 @@ client.on("message", message => {
     return;
   }
 
-  //ここから
+  /* ----------------------------------------------------------------------------------------------- */
+
+  // お客様サポートの転送
+  if (message.channel.id == '668726812276293632') {
+
+    var TransfarEmbed = new Discord.MessageEmbed()
+      .setAuthor(message.member.displayName, message.member.displayAvatarURL)
+      .description(message.content)
+      .setImage(message.attachments.map(attachment => attachment.url)[0])
+      .setFooter(`${message.guild.name} #${message.channel.name}`)
+      .setTimestamp()
+      .setColor(1752220);
+
+    client.channels.cache.get('664211602698141696').send(TransfarEmbed)
+  }
+
+  /* ----------------------------------------------------------------------------------------------- */
 
   if (!message.content.startsWith(prefix)) return; //prefixがついてないコマンドを無視
 
+  //ここから
 
-  /*
-  if (!message.author.id === "221360357191581697") {
-    message.channel.send("メンテ中です");
-    return;
-  }
-  */
 
   let msg = message.content.toUpperCase();
   let sender = message.author;
@@ -215,21 +178,6 @@ client.on("message", message => {
     //確認処理 (console.log で書き出し)
   } finally {
     //console.log(`${message.author.tag} ran the command ${cmd}`);
-  }
-
-  // お客様サポートの転送
-  if (message.channel.id == '668726812276293632') {
-
-    var TransfarEmbed = new Discord.MessageEmbed()
-      .setAuthor(message.member.displayName, message.member.displayAvatarURL)
-      .description(message.content)
-      .setImage(message.attachments.map(attachment => attachment.url)[0])
-      .setFooter(`${message.guild.name} #${message.channel.name}`)
-      .setTimestamp()
-      .setColor(1752220);
-
-    client.channels.cache.get('664211602698141696').send(TransfarEmbed)
-
   }
 
   return;
