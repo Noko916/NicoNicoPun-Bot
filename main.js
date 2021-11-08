@@ -127,8 +127,8 @@ client.on("message", message => {
 
   // お客様サポートの転送
 
-  if (message.channel.id == '668726812276293632') { // Alone #text-2
-  //if (message.channel.id == '777080266824482817') { // 隠れ家Hold'Em #ニコプンお客様サポートセンター
+  //if (message.channel.id == '668726812276293632') { // Alone #text-2
+  if (message.channel.id == '777080266824482817') { // 隠れ家Hold'Em #ニコプンお客様サポートセンター
 
     var m_se = message.guild.id;
     var m_ch = message.channel.id;
@@ -144,8 +144,8 @@ client.on("message", message => {
       .setTimestamp()
       .setColor(1752220);
 
-    client.channels.cache.get('664211602698141696') // nps #2
-    //client.channels.cache.get('738003249575100447') // にこにこぷん 運営チーム #ボックス報告
+    //client.channels.cache.get('664211602698141696') // nps #2
+    client.channels.cache.get('738003249575100447') // にこにこぷん 運営チーム #ボックス報告
     .send(TransfarEmbed);
   }
 

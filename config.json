@@ -1,8 +1,8 @@
 {
     "prefix": ".",
 
-    "version": 79,
+    "version": 80,
 
-    "Mode": "Debug",
+    "Mode": "Normal",
     "isTournament": false
 }
