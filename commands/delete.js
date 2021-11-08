@@ -46,8 +46,8 @@ module.exports = {
             testChannels.forEach(c => {
 
                 var ch = client.channels.fetch(c);
-                var messages = await ch.messages.fetch({ limit: 100 });
-                message.channel.bulkDelete(messages);
+                const dMsg = await ch.messages.fetch({ limit: 100 });
+                message.channel.bulkDelete(dMsg);
 
             });
         }
