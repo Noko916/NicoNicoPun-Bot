@@ -129,7 +129,7 @@ client.on("message", message => {
   if (message.channel.id == '668726812276293632') {
 
     var TransfarEmbed = new Discord.MessageEmbed()
-      .setAuthor(message.member.displayName, message.member.displayAvatarURL())
+      .setAuthor(message.member.displayName, message.author.displayAvatarURL())
       .setDescription(message.content)
       .setImage(message.attachments.map(attachment => attachment.url)[0])
       .setFooter(`${message.guild.name} #${message.channel.name}`, message.guild.icon_url())
