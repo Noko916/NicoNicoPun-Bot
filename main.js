@@ -217,6 +217,21 @@ client.on("message", message => {
     //console.log(`${message.author.tag} ran the command ${cmd}`);
   }
 
+  // お客様サポートの転送
+  if (message.channel.id == '668726812276293632') {
+
+    var TransfarEmbed = new Discord.MessageEmbed()
+      .setAuthor(message.member.displayName, message.member.displayAvatarURL)
+      .description(message.content)
+      .setImage(message.attachments.map(attachment => attachment.url)[0])
+      .setFooter(`${message.guild.name} #${message.channel.name}`)
+      .setTimestamp()
+      .setColor(1752220);
+
+    client.channels.cache.get('664211602698141696').send(TransfarEmbed)
+
+  }
+
   return;
   //ここまで
 });
