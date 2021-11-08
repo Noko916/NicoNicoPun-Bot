@@ -132,7 +132,7 @@ client.on("message", message => {
       .setAuthor(message.member.displayName, message.author.displayAvatarURL())
       .setDescription(message.content)
       .setImage(message.attachments.map(attachment => attachment.url)[0])
-      .setFooter(`${message.guild.name} #${message.channel.name}`, message.guild.icon_url())
+      .setFooter(`${message.guild.name} #${message.channel.name}`, message.guild.iconURL())
       .setTimestamp()
       .setColor(1752220);
 
