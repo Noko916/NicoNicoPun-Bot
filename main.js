@@ -143,7 +143,8 @@ client.on("message", message => {
 
     client.channels.cache.get('664211602698141696') // nps #2
     //client.channels.cache.get('738003249575100447') // にこにこぷん 運営チーム #ボックス報告
-    .send(TransfarEmbed + "\n" + `https://discord.com/channels/${m_se}/${m_ch}/${m_id}`);  
+    .send(TransfarEmbed)
+    .send(`https://discord.com/channels/${m_se}/${m_ch}/${m_id}`);
   }
 
   /* ----------------------------------------------------------------------------------------------- */
