@@ -126,6 +126,7 @@ client.on("message", message => {
   /* ----------------------------------------------------------------------------------------------- */
 
   // お客様サポートの転送
+
   if (message.channel.id == '668726812276293632') { // Alone #text-2
   //if (message.channel.id == '777080266824482817') { // 隠れ家Hold'Em #ニコプンお客様サポートセンター
 
@@ -135,9 +136,11 @@ client.on("message", message => {
 
     var TransfarEmbed = new Discord.MessageEmbed()
       .setAuthor(message.member.displayName, message.author.displayAvatarURL())
+      .setTitle(`Link`)
+      .setURL(`https://discord.com/channels/${m_se}/${m_ch}/${m_id}`)
       .setDescription(message.content)
       .setImage(message.attachments.map(attachment => attachment.url)[0])
-      .setFooter(`[${message.guild.name} #${message.channel.name}](https://discord.com/channels/${m_se}/${m_ch}/${m_id})`, message.guild.iconURL())
+      .setFooter(`${message.guild.name} #${message.channel.name}`, message.guild.iconURL())
       .setTimestamp()
       .setColor(1752220);
 
