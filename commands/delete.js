@@ -46,6 +46,7 @@ module.exports = {
             for(c in testChannels){
                 var ch = client.channels.fetch(c);
                 const dMsg = await ch.messages.fetch({ limit: 100 });
+                ch.send("a")
                 message.channel.bulkDelete(dMsg);
             }
         }
