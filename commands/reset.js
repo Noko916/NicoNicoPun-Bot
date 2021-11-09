@@ -26,7 +26,7 @@ module.exports = {
         if (!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Error: 権限がありません");
 
         for (var r of testRoles) {
-            var rol = message.guild.roles.cache.get(r);
+            var rol = await message.guild.roles.fetch(r);
 
             for (var pl of rol.members) {
                 console.log(pl.role);
