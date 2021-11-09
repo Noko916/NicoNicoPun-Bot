@@ -33,7 +33,8 @@ module.exports = {
             for (var pl of rol.members) {
                 
                 var pid = pl;
-                console.log(pid + "\n ----------------------------------------- \n")
+                console.log(pl)
+                console.log("\n---------------------------\n")
                 
             }
         }
