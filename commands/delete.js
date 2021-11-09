@@ -43,7 +43,7 @@ module.exports = {
 
         } else if (message.content == "reset") {
 
-            for(c in testChannels){
+            for(var c in testChannels){
                 var ch = client.channels.fetch(c);
                 console.log(ch);
                 //const dMsg = await ch.messages.fetch({ limit: 100 });
