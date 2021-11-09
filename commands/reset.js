@@ -28,13 +28,10 @@ module.exports = {
         for (var r of testRoles) {
             var rol = await message.guild.roles.fetch(r);
 
-            //console.log(rol)
-
             for (var pl of rol.members) {
                 
-                var pid = pl;
-                console.log(pl[0])
-                console.log("\n---------------------------\n")
+                var pid = pl[0];
+                client.members.cache.get(pid).roles.remove(r);
                 
             }
         }
