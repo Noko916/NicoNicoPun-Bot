@@ -25,7 +25,8 @@ module.exports = {
 
         if (!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Error: 権限がありません");
 
-        for (var r of testRoles) {
+        // role解除
+        for (var r of HRoles) {
             var rol = await message.guild.roles.fetch(r);
 
             for (var Rpl of rol.members) {
@@ -38,8 +39,8 @@ module.exports = {
             }
         }
 
-        return;
-        for (var c of testChannels) {
+        // メッセージ削除
+        for (var c of HChannels) {
             var dCha = client.channels.cache.get(c)
             var dMsg = await dCha.messages.fetch({ limit: 100 });
             dCha.bulkDelete(dMsg);
