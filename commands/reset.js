@@ -28,15 +28,17 @@ module.exports = {
         for (var r of testRoles) {
             var rol = await message.guild.roles.fetch(r);
 
-            console.log(rol)
+            //console.log(rol)
 
-            for (var pl of rol.member) {
+            for (var pl of rol.members) {
                 
-                console.log(pl)
+                var pid = pl.user.id;
+                console.log(pid)
                 
             }
         }
 
+        return;
         for (var c of testChannels) {
             var dCha = client.channels.cache.get(c)
             var dMsg = await dCha.messages.fetch({ limit: 100 });
