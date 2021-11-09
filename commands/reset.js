@@ -31,7 +31,7 @@ module.exports = {
             for (var Rpl of rol.members) {
                 
                 var pid = Rpl[0];
-                var server = client.guild.cache.get(message.guild.id)
+                var server = client.guilds.cache.get(message.guild.id)
                 var pl = await server.members.fetch(pid);
                 pl.roles.remove(r);
 
