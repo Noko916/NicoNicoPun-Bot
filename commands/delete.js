@@ -45,7 +45,7 @@ module.exports = {
 
         } else if (message.content == ".reset") {
 
-            for(var c in testChannels){
+            for(var c of testChannels){
 
                 console.log(c)
 
