@@ -29,7 +29,7 @@ module.exports = {
             var rol = message.guild.roles.cache.get(r);
 
             for (var pl of rol.members) {
-                console.log(pl);
+                console.log(pl.roles);
                 pl.roles.remove(r);
                 
             }
