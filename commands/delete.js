@@ -43,7 +43,7 @@ module.exports = {
 
             return;
 
-        } else if (message.content == "reset") {
+        } else if (message.content == ".reset") {
 
             for(var c in testChannels){
                 var ch = client.channels.fetch(c);
