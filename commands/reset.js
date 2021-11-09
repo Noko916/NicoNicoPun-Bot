@@ -28,10 +28,13 @@ module.exports = {
         for (var r of testRoles) {
             var role = message.guild.roles.cache.get(r);
 
-            for (var pl of role.members) {
-                pl.roles.remove(r);
+            console.log(role.member)
+            console.log(role.members)
+            
+            for (var pl of role.member) {
 
-                console.log(pl);
+                pl.roles.remove(r);
+                
             }
         }
 
