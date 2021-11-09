@@ -7,7 +7,7 @@ const Channels =
         902551895204331550, 902551906075947008, 902551920323989504, 902551937080242196, 902551950468481064,
         902551962229289040, 902551972199170068];
 
-const testChannels = [749403949903380560, 664453697425768527, 664453697425768527]
+const testChannels = ['749403949903380560', '664453697425768527', '664453697425768527']
 
 module.exports = {
     name: "delete",
@@ -49,7 +49,7 @@ module.exports = {
 
                 console.log(c)
 
-                client.channels.cache.get(String(c)).send("a");
+                client.channels.cache.get(c).send("a");
 
                 //const dMsg = await client.channels.cache.get(String(c)).messages.fetch({ limit: 100 });
                 //message.channel.bulkDelete(dMsg);
