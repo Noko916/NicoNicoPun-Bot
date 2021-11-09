@@ -44,10 +44,8 @@ module.exports = {
         } else if (message.content == ".reset") {
 
             for(var c of testChannels){
-                const dMsg = await client.channels.cache.get(c).messages.fetch({ limit: 100 });
+                var dMsg = await client.channels.cache.get(c).messages.fetch({ limit: 100 });
                 message.channel.bulkDelete(dMsg);
-                console.log(c);
-                console.log(client.channels.name);
             }
         }
     }
