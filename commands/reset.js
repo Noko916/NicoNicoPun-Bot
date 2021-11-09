@@ -19,7 +19,7 @@ const testChannels = ['907448618645061713', '907448728510689350', '9074487449271
 
 module.exports = {
     name: "reset",
-    description: `メッセージを消去します\n${LimitNum} 件まで一括で消去可能\n14 日以上前のメッセージが含まれている時は削除できません\n\`.reset [件数]\``,
+    description: `運営用コマンド`,
 
     async execute(client, message, args) {
 
