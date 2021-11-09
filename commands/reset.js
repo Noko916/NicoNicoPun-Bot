@@ -28,6 +28,8 @@ module.exports = {
         for (var r of testRoles) {
             var rol = await message.guild.roles.fetch(r);
 
+            console.log(rol)
+
             for (var pl of rol.member) {
                 
                 console.log(pl)
