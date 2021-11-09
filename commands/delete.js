@@ -18,6 +18,8 @@ module.exports = {
 
         if (!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Error: 権限がありません");
 
+        console.log(message.content);
+
         if (message.content.includes("delete")) {
 
             if (args[0] > LimitNum) return message.channel.send(`${LimitNum} 件までにしてください`);
