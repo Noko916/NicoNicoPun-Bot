@@ -61,25 +61,17 @@ if (isTournament) {
     // プレイヤーのメッセージをログに収集
     if (PlayerChID.includes(MessageChID)) {
 
-      const sendEmbed = {
-        embed: {
-          author: {
-            name: message.member.displayName,
-            icon_url: message.member.user.displayAvatarURL()
-          },
-          image: {
-            url: message.attachments.map(attachment => attachment.url)[0]
-          },
-          description: message.content,
-          footer: {
-            text: `#${message.channel.name}`
-          },
-          timestamp: message.createdTimestamp
-        }
-      }
+      var sendEmbed = new MessageEmbed()
+      .setAuthor(message.member.displayName, message.author.displayAvatarURL())
+      .setTitle(`Link`)
+      .setURL(`https://discord.com/channels/${m_se}/${m_ch}/${m_id}`)
+      .setDescription(message.content)
+      .setImage(message.attachments.map(attachment => attachment.url)[0])
+      .setFooter(`#${message.channel.name}`, message.guild.iconURL())
+      .setTimestamp()
 
       // 送信
-      client.channels.cache.get(LogChID).send(sendEmbed);
+      client.channels.cache.get(LogChID).send({ embeds: [sendEmbed] });
     }
 
     // アナウンスチャンネルから各プレイヤーチャンネルに一斉にメッセージを送信
@@ -88,26 +80,21 @@ if (isTournament) {
       const cont = message.content;
       const rep = cont.slice(1);
 
-      const sendEmbed = {
-        embed: {
-          author: {
-            name: message.member.displayName,
-            icon_url: message.member.user.displayAvatarURL()
-          },
-          description: rep,
-          footer: {
-            text: `#${message.channel.name}`
-          },
-          color: 15844367,
-          timestamp: message.createdTimestamp
-        }
-      }
+      var sendEmbed = new MessageEmbed()
+      .setAuthor(message.member.displayName, message.author.displayAvatarURL())
+      .setTitle(`Link`)
+      .setURL(`https://discord.com/channels/${m_se}/${m_ch}/${m_id}`)
+      .setDescription(rep)
+      .setImage(message.attachments.map(attachment => attachment.url)[0])
+      .setFooter(`#${message.channel.name}`, message.guild.iconURL())
+      .setTimestamp()
+      .setColor(15844367);
 
       PlayerChID.forEach(element => {
-        client.channels.cache.get(element).send(sendEmbed)
+        client.channels.cache.get(element).send({ embeds: [sendEmbed] })
       });
 
-      client.channels.cache.get(LogChID).send(sendEmbed)
+      client.channels.cache.get(LogChID).send({ embeds: [sendEmbed] })
     }
   });
 }
