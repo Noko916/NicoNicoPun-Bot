@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = {
   name: "dice",
-  description: "サイコロを振ってくれます (20個以下, 1000面以下)\n.dice ke...? なにそれ\n\`.dice <個数>d<面>\`",
+  description: "サイコロを振ってくれます (20個以下, 1000面以下)\ndice ke...? なにそれ...\n\`.dice <個数>d<面>\`",
   aliases: ["roll"],
 
   async execute(client, message, args) {

@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
+const { MessageEmbed } = require('discord.js');
 
-const EmbedBoxB = new Discord.MessageEmbed()
+const EmbedBoxB = new MessageEmbed()
   .setTitle("箱開け報酬 ブロンズ")
   .addFields({
     name: "Bronze",
@@ -10,7 +11,7 @@ const EmbedBoxB = new Discord.MessageEmbed()
   })
   .setColor(1752220);
 
-const EmbedBoxS = new Discord.MessageEmbed()
+const EmbedBoxS = new MessageEmbed()
   .setTitle("箱開け報酬　シルバー")
   .addFields({
     name: "Silver",
@@ -20,7 +21,7 @@ const EmbedBoxS = new Discord.MessageEmbed()
   })
   .setColor(1752220);
 
-const EmbedBoxG = new Discord.MessageEmbed()
+const EmbedBoxG = new MessageEmbed()
   .setTitle("箱開け報酬　ゴールド")
   .addFields({
     name: "Gold",
@@ -30,7 +31,7 @@ const EmbedBoxG = new Discord.MessageEmbed()
   })
   .setColor(1752220);
 
-const EmbedBoxGp = new Discord.MessageEmbed()
+const EmbedBoxGp = new MessageEmbed()
   .setTitle("箱開け報酬　ゴールド +")
   .addFields({
     name: "Gold+",
@@ -40,7 +41,7 @@ const EmbedBoxGp = new Discord.MessageEmbed()
   })
   .setColor(1752220);
 
-const EmbedBoxP = new Discord.MessageEmbed()
+const EmbedBoxP = new MessageEmbed()
   .setTitle("箱開け報酬　プラチナ")
   .addFields({
     name: "Platinum",
@@ -52,19 +53,19 @@ const EmbedBoxP = new Discord.MessageEmbed()
 
 module.exports = {
   name: "box",
-  description: `箱開け報酬の一覧を表示します\n\`.bank <b/s/g/g+/p>\``,
+  description: `箱開け報酬の一覧を表示します\n\`.box <b/s/g/g+/p>\``,
 
   async execute(client, message, args) {
     if (args[0] == "b" || args[0] == "B") {
-      message.channel.send(EmbedBoxB);
+      message.channel.send({ embeds: [EmbedBoxB] });
     } else if (args[0] == "s" || args[0] == "S") {
-      message.channel.send(EmbedBoxS);
+      message.channel.send({ embeds: [EmbedBoxS] });
     } else if (args[0] == "g" || args[0] == "G") {
-      message.channel.send(EmbedBoxG);
+      message.channel.send({ embeds: [EmbedBoxG] });
     } else if (args[0] == "g+" || args[0] == "G+") {
-      message.channel.send(EmbedBoxGp);
+      message.channel.send({ embeds: [EmbedBoxGp] });
     } else if (args[0] == "p" || args[0] == "P") {
-      message.channel.send(EmbedBoxP);
+      message.channel.send({ embeds: [EmbedBoxP] });
     } else {
       message.channel.send(
         "`.box <B/S/G/G+/P>` の形式で入力してください　例: `.box G+`"

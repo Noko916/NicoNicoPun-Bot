@@ -9,7 +9,11 @@ module.exports = {
     //console.log(args);
     console.log(array);
 
-    message.channel.send(array[Math.floor(Math.random() * array.length)]);
+    var result = array[Math.floor(Math.random() * array.length)]
+
+    console.log(">> [ " + result + " ]")
+
+    message.channel.send(result);
     return;
   },
 };

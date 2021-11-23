@@ -1,5 +1,6 @@
 const { prefix } = require('../config.json');
 const Discord = require("discord.js");
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
   name: "help",
@@ -7,17 +8,17 @@ module.exports = {
   aliases: ["halp", "welp", "walp", "command", "commands", "cmd", "herupu"],
 
   async execute(client, message, args) {
-    const EmbedHelp = new Discord.MessageEmbed().setColor(1752220);
     const { commands } = message.client;
+    const Embed = new MessageEmbed()
+      .setColor(1752220);
 
     if (!args.length) {
 
-      EmbedHelp
+      Embed
         .setTitle("使えるコマンドはこちら")
-
         .setDescription(`${prefix}` + commands.map(c => c.name).join(`\n${prefix}`))
         .setFooter(`${prefix}help [command name]   で詳細を表示します`);
-      message.channel.send(EmbedHelp);
+      message.channel.send({ embeds: [Embed] });
 
       return;
     }
@@ -27,15 +28,15 @@ module.exports = {
       || commands.find(c => c.aliases && c.aliases.includes(name));
 
     if (!cmd) {
-      message.reply(`\`${prefix}${name}}\` なんてコマンドないよ！！`)
+      message.reply(`\`${prefix}${name}\` は見つかりませんでした`)
 
       return;
     }
 
-    EmbedHelp.setTitle(`${prefix}${cmd.name}`);
-    if (cmd.description) EmbedHelp.addField(`Description`, cmd.description);
-    if (cmd.aliases)     EmbedHelp.addField(`Aliases`,     cmd.aliases.join(', '));
+    Embed.setTitle(`${prefix}${cmd.name}`);
+    if (cmd.description) Embed.addField(`Description`, cmd.description);
+    if (cmd.aliases) Embed.addField(`Aliases`, cmd.aliases.join(', '));
 
-    message.channel.send(EmbedHelp);
+    message.channel.send({ embeds: [Embed] });
   }
 }

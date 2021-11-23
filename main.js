@@ -1,9 +1,13 @@
-// Discord bot implements
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const fs = require('fs');
+const { Intents, Client } = require("discord.js");
 const { prefix, version, Mode, isTournament } = require('./config.json');
 
-const client = new Discord.Client();
+const options = {
+  intents: ["GUILDS", "GUILD_MESSAGES"],
+};
+
+const client = new Discord.Client(options);
 client.commands = new Discord.Collection();
 
 const cmds = fs.readdirSync(`./commands`).filter(file => file.endsWith('.js'));
@@ -21,7 +25,7 @@ if (isTournament) {
   const LogChID = "880764948584726588";
   const AnnounceChID = "880875110322565150";
 
-  client.on("message", async message => {
+  client.on("messageCreate", async message => {
 
     const MessageChID = message.channel.id;
 
@@ -111,7 +115,7 @@ if (isTournament) {
 /* ----------------------------------------------------------------------------------------------- */
 
 // Main
-client.on("message", message => {
+client.on("messageCreate", message => {
   if (message.author.bot) return;
 
   if (message.content.includes("everyone")) return;
