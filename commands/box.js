@@ -51,26 +51,76 @@ const EmbedBoxP = new MessageEmbed()
   })
   .setColor(1752220);
 
+
+const Button_B = new MessageButton()
+  .setCustomId("Button_B")
+  .setStyle("PRIMARY")
+  .setLabel("B")
+
+const Button_S = new MessageButton()
+  .setCustomId("Button_S")
+  .setStyle("PRIMARY")
+  .setLabel("S")
+
+const Button_G = new MessageButton()
+  .setCustomId("Button_G")
+  .setStyle("PRIMARY")
+  .setLabel("G")
+
+const Button_GP = new MessageButton()
+  .setCustomId("Button_GP")
+  .setStyle("PRIMARY")
+  .setLabel("G+")
+
+const Button_P = new MessageButton()
+  .setCustomId("Button_P")
+  .setStyle("PRIMARY")
+  .setLabel("P")
+
+
 module.exports = {
   name: "box",
   description: `箱開け報酬の一覧を表示します\n\`.box <b/s/g/g+/p>\``,
 
   async execute(client, message, args) {
-    if (args[0] == "b" || args[0] == "B") {
-      message.channel.send({ embeds: [EmbedBoxB] });
-    } else if (args[0] == "s" || args[0] == "S") {
-      message.channel.send({ embeds: [EmbedBoxS] });
-    } else if (args[0] == "g" || args[0] == "G") {
-      message.channel.send({ embeds: [EmbedBoxG] });
-    } else if (args[0] == "g+" || args[0] == "G+") {
-      message.channel.send({ embeds: [EmbedBoxGp] });
-    } else if (args[0] == "p" || args[0] == "P") {
-      message.channel.send({ embeds: [EmbedBoxP] });
-    } else {
-      message.channel.send(
-        "`.box <B/S/G/G+/P>` の形式で入力してください　例: `.box G+`"
-      );
-      return;
-    }
+
+    const choosebox = await message.channel.send({
+      content: "ボックスを選択してください",
+      components: [
+        new Discord.MessageActionRow().addComponents(Button_B),
+        new Discord.MessageActionRow().addComponents(Button_S),
+        new Discord.MessageActionRow().addComponents(Button_G),
+        new Discord.MessageActionRow().addComponents(Button_GP),
+        new Discord.MessageActionRow().addComponents(Button_P)]
+    });
+
+    client.once('interactionCreate', async (interaction) => {
+
+      const Ans = interaction.customId;
+      console.log(">> Button: " + Ans)
+      choosebox.delete();
+
+      switch (Ans) {
+        case "Button_B":
+          message.channel.send({ embeds: [EmbedBoxB] });
+          break;
+
+        case "Button_S":
+          message.channel.send({ embeds: [EmbedBoxS] });
+          break;
+
+        case "Button_G":
+          message.channel.send({ embeds: [EmbedBoxG] });
+          break;
+
+        case "Button_GP":
+          message.channel.send({ embeds: [EmbedBoxGp] });
+          break;
+
+        case "Button_P":
+          message.channel.send({ embeds: [EmbedBoxP] });
+          break;
+      }
+    })
   }
 };
