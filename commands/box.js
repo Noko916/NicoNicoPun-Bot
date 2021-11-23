@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, MessageButton } = require('discord.js');
 
 const EmbedBoxB = new MessageEmbed()
   .setTitle("箱開け報酬 ブロンズ")
