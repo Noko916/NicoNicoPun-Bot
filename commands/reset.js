@@ -91,21 +91,34 @@ module.exports = {
                     const Ro = (Ans1 === "NORMAL" ? HRoles : PRoles);
                     const Ch = (Ans1 === "NORMAL" ? HChannels : PChannels);
 
-                    // role解除
-                    for (var r of Ro) {
-                        var rol = await message.guild.roles.fetch(r);
 
-                        for (var Rpl of rol.members) {
+                    // Roles
+                    let tasks = [];
 
-                            var pid = Rpl[0];
-                            var server = client.guilds.cache.get(message.guild.id)
-                            var pl = await server.members.fetch(pid);
-                            pl.roles.remove(r);
-
-                        }
+                    for (var RoleID of Ro) {
+                        console.log(`> ${RoleID}`)
+                        tasks.push(promise1(RoleID));
                     }
 
-                    // メッセージ削除
+                    Promise.all(tasks).then(console.log("ok"));
+
+                    function promise1(RoleID) {
+                        new Promise((resolve, reject) => {
+                            message.guild.roles.fetch(RoleID).then((role) => {
+                                for (var RoleUser of role.members) {
+
+                                    var Userid = RoleUser[0];
+                                    var server = client.guilds.cache.get(message.guild.id);
+                                    server.members.fetch(Userid).then(user => {
+                                        user.roles.remove(RoleID).then(console.log(RoleID));
+                                    })
+                                }
+                            })
+                            resolve(RoleID);
+                        })
+                    }
+
+                    // Messages
                     for (var c of Ch) {
                         var dCha = client.channels.cache.get(c)
                         var dMsg = await dCha.messages.fetch({ limit: 100 });

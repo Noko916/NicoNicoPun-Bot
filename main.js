@@ -4,7 +4,7 @@ const { Intents, Client, MessageEmbed } = require("discord.js");
 const { prefix, version, Mode, isTournament } = require('./config.json');
 
 const options = {
-  intents: ["GUILDS", "GUILD_MESSAGES"],
+  intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"],
 };
 
 const client = new Discord.Client(options);
